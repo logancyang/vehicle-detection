@@ -1,4 +1,4 @@
-## Vehicle Detection**
+## Vehicle Detection
 
 The goals / steps of this project are the following:
 
