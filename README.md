@@ -1,4 +1,4 @@
-**Vehicle Detection Project**
+## Vehicle Detection**
 
 The goals / steps of this project are the following:
 
@@ -16,10 +16,10 @@ The goals / steps of this project are the following:
 [image4]: ./output_images/hog_car.png
 [image5]: ./output_images/features.png
 [image6]: ./output_images/sliding_window_example.png
-[image7]: ./output_images/test_output.png
-[image8]: ./output_images/sliding_window_scales.png
-[image9]: ./output_images/heatmap.png
-[image10]: ./output_images/labelmap.png
+[image7]: ./output_images/sliding_window_scales.png
+[image8]: ./output_images/heatmap.png
+[image9]: ./output_images/labelmap.png
+[image10]: ./output_images/test_output.png
 
 ### Histogram of Oriented Gradients (HOG)
 
@@ -72,31 +72,30 @@ The sliding window search runs square patches of the image with overlap and uses
 
 Further improvements can be made since there are only certain regions in the image where we want to look for cars. I excluded the top part which is the sky, and chose 4 scales: 1, 1.5, 2 and 3.5 because they appear to give relatively good results in the heatmap voting step.
 
-#### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
+#### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
+
+From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle. I constructed bounding boxes to cover the area of each blob detected.  
+
+![alt text][image7]
+
+Here's an example result showing the heatmap and labeled map
+
+![alt text][image8]
+![alt text][image9]
+
+#### 3. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
 Ultimately I searched on scale 1, 1.5, 2 and 3.5 using YCrCb ALL-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a relatively nice result.  Here are some example images:
 
-![alt text][image7]
+![alt text][image10]
 
 ---
 
 ### Video Implementation
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
+#### Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
 
 Here's a [link to my video result](https://youtu.be/qNMrJdLmYyk)
-
-
-#### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
-
-From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle. I constructed bounding boxes to cover the area of each blob detected.  
-
-![alt text][image8]
-
-Here's an example result showing the heatmap and labeled map
-
-![alt text][image9]
-![alt text][image10]
 
 ---
 
